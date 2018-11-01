@@ -1,10 +1,10 @@
 //Woon Jun Shen
 //UM402 (433 MHz UART)
 #include <SoftwareSerial.h>
-#include "DHT.h"
+#include "dht.h"
 #define dht_apin A0// Analog Pin sensor is connected to
 #define dht_type DHT11
-DHT dht(dht_apin, dht_type);
+dht DHT;
 SoftwareSerial mySerial(2, 3); //TX, RX
 // gnd SET_A and SET_B for Normal Mode (Send and Receive)
 void setup() {
@@ -27,14 +27,6 @@ void loop() {
     Serial.print("temperature = ");
     Serial.print(DHT.temperature);
     Serial.println("C  ");
-    float h = dht.readHumidity();
-    float t = dht.readTemperature();
-    Serial.print("Current humidity = ");
-    Serial.print((int)h);
-    Serial.print("%  ");
-    Serial.print("temperature = ");
-    Serial.print((int)t);
-    Serial.println("C  ");
   //Fastest should be once every two seconds.
   if(Serial.available() > 0){//Read from serial monitor and send over UM402
     String input = Serial.readString();
@@ -44,7 +36,7 @@ void loop() {
     String input = mySerial.readString();
     Serial.println(input);    
   }
-    mySerial.write((byte)h);
-    mySerial.write((byte)t);
+    mySerial.write((byte)DHT.humidity);
+    mySerial.write((byte)DHT.temperature);
   delay(2000);
 }
