@@ -1,4 +1,3 @@
-# Hướng dẫn kết nối
  - *Sơ đồ kết nối* 
 \
   | Arduino Uno R3 | Lora Ra-02 |
