@@ -7,7 +7,7 @@ Kết nối mạch theo hình dưới: <br/>
 \
 ..* Sơ đồ kết nối <br/>
 | Arduino Uno R3| Lora Ra-02 |
-| ------------- |------------|
+| ------------- |-----------:|
 | 3v3           |    3v3     |
 | GND           |    GND     |  
 | RESET         |    D9      |
@@ -19,7 +19,7 @@ Kết nối mạch theo hình dưới: <br/>
 \
 \
 | Arduino Uno R3|   DHT11    |
-| ------------- |------------|
+| ------------- |-----------:|
 | 3v3           |    3v3     |
 | GND           |    GND     | 
 | A0            |    Analog  | 
