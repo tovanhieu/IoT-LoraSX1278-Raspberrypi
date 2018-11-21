@@ -25,6 +25,5 @@ pip install pyLoRa
 pip install pycryptodome
 pip install pycrypto
 ```
-## Cấu hình SPI cho Raspberry Pi:
 ### Refrence
 - https://github.com/rpsreal/pySX127x
