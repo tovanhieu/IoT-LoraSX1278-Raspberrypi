@@ -1,4 +1,5 @@
-
+# Hướng dẫn
+## Kết nối phần cứng:
     | Ra-02 LoRa BOARD1 |  RaspPi GPIO  | 
     | ------------------| --------------|
     |        MOSI       | GPIO 10       | 
@@ -11,8 +12,8 @@
     |        DIO3       | GPIO 18       |      
     |     RST (Reset)   | GPIO 22       |    
     |        LED        | GPIO 27       |     
-    
-    
+
+\
 ![gw](https://user-images.githubusercontent.com/26000753/48851590-04920080-edde-11e8-9475-ce73f5579403.PNG)
 \
 ### Refrence
