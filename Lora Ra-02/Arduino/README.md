@@ -5,7 +5,8 @@ Kết nối mạch theo hình dưới: <br/>
 ![node1](https://user-images.githubusercontent.com/26000753/48846154-f2f62c00-edd0-11e8-91ea-63b67e13dcf0.PNG) <br/>
 \
 \
- - *Sơ đồ kết nối* <br/>
+ - *Sơ đồ kết nối* 
+\
 | Arduino Uno R3 | Lora Ra-02 |
 | -------------  | ---------- |
 | 3v3            |    3v3     |
