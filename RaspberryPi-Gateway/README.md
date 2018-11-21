@@ -1,5 +1,6 @@
 # Hướng dẫn
 ## Kết nối phần cứng:
+\
     | Ra-02 LoRa BOARD1 |  RaspPi GPIO  | Ra-02 LoRa BOARD2 |  RaspPi GPIO  |
     |:------------------|:--------------|:------------------|:-------------:|
     |        MOSI       | GPIO 10       |        MOSI       | GPIO 10       |
