@@ -1,3 +1,8 @@
+// Copyright 2018 Rui Silva.
+// This file is part of rpsreal/LoRa_Ra-02_Arduino
+// Based on example LoRa 9x_TX RADIOHEAD library
+// It is designed to work with LORA_CLIENT
+
 #include <SPI.h>
 #include <RH_RF95.h>
 #include "dht.h"
@@ -10,7 +15,7 @@
 // Blinky on receipt
 #define LED 6
 //Define DHT11 Analog Pin
-#define dht_apin A0 
+  #define dht_apin A0   
 //Define MQ0 Analog Pin
 #define SMOKEA1 A1
 // Change to 434.0 or other frequency, must match RX's freq!
@@ -20,6 +25,7 @@
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
 dht DHT;
 void concatenate_string(char* ,char*);
+void reset_radiopacket(char[] ,char[] ,char[] ,char[]);
 void setup() 
 {
   pinMode(SMOKEA1, INPUT);
@@ -96,10 +102,7 @@ void loop()
     rf95.send((uint8_t *)radiopacket, 22);
     delay(10);
     rf95.waitPacketSent();
-    memset(radiopacket, 0, sizeof(radiopacket));
-    memset(radiopacket1, 0, sizeof(radiopacket1));
-    memset(radiopacket2, 0, sizeof(radiopacket2));
-    memset(radiopacket2, 0, sizeof(radiopacket3));
+    reset_radiopacket(radiopacket,radiopacket1,radiopacket2,radiopacket3);
     uint8_t buf[RH_RF95_MAX_MESSAGE_LEN];
     uint8_t len = sizeof(buf);
     if (rf95.waitAvailableTimeout(20000)){ 
@@ -144,3 +147,10 @@ void concatenate_string(char *original, char *add)
    }
    *original = '\0';
 }
+void reset_radiopacket(char a[],char b[],char c[],char d[])
+{
+    memset(a, 0, sizeof(a));
+    memset(b, 0, sizeof(b));
+    memset(c, 0, sizeof(c));
+    memset(d, 0, sizeof(d));
+  }
