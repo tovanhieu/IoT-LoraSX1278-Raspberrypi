@@ -21,11 +21,29 @@
 # You should have received a copy of the GNU General Public License along with pySX127.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-
+import time
 from time import sleep
 from SX127x.LoRa import *
 from SX127x.LoRaArgumentParser import LoRaArgumentParser
 from SX127x.board_config import BOARD
+from influxdb import InfluxDBClient
+
+import sys
+import datetime
+
+#Configure the InfluxDB client object
+host = "192.138.0.105"
+port = 8086
+user = "rpi-3"
+password = "rpi-3"
+dbname = "sensor_data"
+interval = 30 #Sample period in seconds 
+# think of measurement as a SQL table, it's not...but...
+measurement = "rpi-dht22"
+#Create the InfluxDB client object
+client = InfluxDBClient(host, port, user, password, dbname)
+
+location = "Train"
 
 BOARD.setup()
 
@@ -44,6 +62,29 @@ class LoRaRcvCont(LoRa):
         self.clear_irq_flags(RxDone=1)
         payload = self.read_payload(nocheck=True)
         print(bytes(payload).decode("utf-8",'ignore'))
+        atsmosphere = bytes(payload[8:14]).decode("utf-8","ignore")
+        tem = bytes(payload[14:19]).decode("utf-8","ignore")
+        hum = bytes(payload[20:25]).decode("utf-8","ignore")
+        print(atsmosphere)
+        print(tem)
+        print(hum)
+        iso = time.ctime()
+        data = [
+        {
+          "measurement": measurement,
+              "time": iso,
+              "tags": {
+                  "location": location,
+              },
+              "fields": {
+                  "atmosphere" : atsmosphere,
+                  "temperature" : tem,
+                  "humidity": hum
+              }
+          }
+        ]
+        # Send the JSON data to influxDB
+        client.write_points(data)
         self.set_mode(MODE.SLEEP)
         self.reset_ptr_rx()
         BOARD.led_off()
