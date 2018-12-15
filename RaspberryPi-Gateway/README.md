@@ -27,3 +27,4 @@ pip install pycrypto
 ```
 ### Refrence
 - https://github.com/rpsreal/pySX127x
+- https://pypi.org/project/pyLoRa/
