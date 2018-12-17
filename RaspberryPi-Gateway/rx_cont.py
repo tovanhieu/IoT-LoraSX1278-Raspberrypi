@@ -28,11 +28,20 @@ from SX127x.LoRaArgumentParser import LoRaArgumentParser
 from SX127x.board_config import BOARD
 from influxdb import InfluxDBClient
 
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+
 import sys
 import datetime
 
+cred = credentials.Certificate('./smart-transportation-812b6-firebase-adminsdk-v4son-6ec626f3c5.json')
+firebase_admin.initialize_app(cred)
+db = firestore.client()
+doc_ref = db.collection(u'test').document(u'h2cVhqX3mV6qp3ZrzxKL')
+
 #Configure the InfluxDB client object
-host = "192.138.0.105"
+host = "192.138.0.108"
 port = 8086
 user = "rpi-3"
 password = "rpi-3"
@@ -85,6 +94,15 @@ class LoRaRcvCont(LoRa):
         ]
         # Send the JSON data to influxDB
         client.write_points(data)
+        
+        # Send data to cloud filestore firebase
+        doc_ref.set({
+            u'atmostphere': atsmosphere,
+            u'hum': hum,
+            u'temp': tem,
+            u'timestamp': iso
+        })
+
         self.set_mode(MODE.SLEEP)
         self.reset_ptr_rx()
         BOARD.led_off()
