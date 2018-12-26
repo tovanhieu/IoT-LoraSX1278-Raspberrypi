@@ -6,11 +6,13 @@ The project contain two properties:
 + Gateway: Using raspberry Pi 3 B+, after collect data from node gateway analyze data and send to the cloud, we use Firebase to save data in the cloud and share with web and mobie app via API, code can be viewed in the file LORA_NODE.ino folowing LoraProject/RaspberryPi-Gatewayo
 ##### https://github.com/tovanhieu/LoraProject/blob/master/RaspberryPi-Gateway/rx_cont.py
 
-### Author To Van Hieu
-### Update 11/2018
+### Author 
+To Van Hieu
+### Update 
+11/2018
 ## Referencece Links
-### https://github.com/rpsreal/pySX127x
-### https://pypi.org/project/pyLoRa/
-### https://github.com/rpsreal/LoRa_Ra-02_Arduino
-### https://console.firebase.google.com
-### https://www.e-gizmo.net/oc/kits%20documents/LORA%20Module%20RA-02%20V.1/LORA%20Module%20RA-02%20V.1.pdf
+##### https://github.com/rpsreal/pySX127x
+##### https://pypi.org/project/pyLoRa/
+##### https://github.com/rpsreal/LoRa_Ra-02_Arduino
+##### https://console.firebase.google.com
+##### https://www.e-gizmo.net/oc/kits%20documents/LORA%20Module%20RA-02%20V.1/LORA%20Module%20RA-02%20V.1.pdf
