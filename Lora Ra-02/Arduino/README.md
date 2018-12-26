@@ -6,6 +6,6 @@
 Kết nối các chân theo bảng trên <br/>
 **Chú ý**: *Do module Lora Ra-02 hoạt động ở mức điện áp 3v3 (khác với arduino điện áp pin/out ra là 5v) nên cần phải sử dụng [module chuyển đổi logic từ 3v3 sang 5v], module có hai đầu cấp nguồn 3v3 và 5v nên nguồn của module sễ cấp chung với với nguồn của arduino còn chân đất nối chung hai đầu*
 \
-- Sau khi kết nối xong nạp code chương trình LORA_SENDERDHT11.ino để gửi thông tin đến gateway
+- Sau khi kết nối xong nạp code chương trình LORA_NODE.ino để gửi thông tin đến gateway
 ### Reference link
 - https://github.com/rpsreal/LoRa_Ra-02_Arduino
