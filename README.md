@@ -1,9 +1,9 @@
 # LoraProject
 This is Lora project for study purpose.
 The project contain two properties:
-+ Node: Using arduio with Lora-Ra 02 - SX1278, the node collect data including: temperature, humidity, percentage CO atsmophere,.... and send to the gateway node, code can be viewed in the file LORA_NODE.ino folowing LoraProject/Lora Ra-02/Arduino/LORA_NODE.ino
++ Node: Using arduio with Lora-Ra 02 - SX1278, the node collects data including: temperature, humidity, percentage CO atsmophere,.... and sends to the gateway node, code can be viewed in the file LORA_NODE.ino folowing LoraProject/Lora Ra-02/Arduino/LORA_NODE.ino
 ##### https://github.com/tovanhieu/LoraProject/blob/master/Lora%20Ra-02/Arduino/LORA_NODE.ino 
-+ Gateway: Using raspberry Pi 3 B+, after collect data from node gateway analyze data and send to the cloud, we use Firebase to save data in the cloud and share with web and mobie app via API, code can be viewed in the file LORA_NODE.ino folowing LoraProject/RaspberryPi-Gatewayo
++ Gateway: Using raspberry Pi 3 B+, after collects data from node gateway analyze data and sends to the cloud, we use Firebase to save data in the cloud and share with the web and the mobie app via API, code can be viewed in the file LORA_NODE.ino folowing LoraProject/RaspberryPi-Gatewayo
 ##### https://github.com/tovanhieu/LoraProject/blob/master/RaspberryPi-Gateway/rx_cont.py
 
 ### Author 
