@@ -1,6 +1,6 @@
 # Hướng dẫn
 ## Kết nối phần cứng:
-![capture2](https://user-images.githubusercontent.com/26000753/48856223-6f483980-ede8-11e8-8653-3bf599061107.PNG)
+![gw](https://user-images.githubusercontent.com/26000753/51383678-ac148080-1b4c-11e9-8d8a-18e5203f1d75.PNG)
 \
 ![lora-rpi-gwpin-out](https://user-images.githubusercontent.com/26000753/51383622-87200d80-1b4c-11e9-8330-122aed92a09c.PNG)
 \
