@@ -43,7 +43,7 @@ the datasheet but the information there seems to be wrong.
 # The load resistance on the board
 RLOAD = 10.0
 # Calibration resistance at atmospheric CO2 level
-RZERO = 76.63
+RZERO = 76
 # Parameters for calculating ppm of CO2 from sensor resistance
 PARA = 116.6020682
 PARB = 2.769034857
@@ -151,16 +151,13 @@ def map(x,in_min,in_max,out_min,out_max):
 
 def main():
   while True:
-   value_pin = map((value_ads.value - 565), 0, 26690, 0, 1023) # 565 / 535 fix value
+   value_pin = map((value_ads.value - 500), 0, 26690, 0, 1023) # 565 / 535 fix value
+   print(value_pin)
    rzero = getRZero(value_pin,RLOAD,ATMOCO2,PARA,PARB)
    correctedRZero = getCorrectedRZero(t,h,CORA,CORB,CORC,CORD,CORE,CORF,CORG,value_pin,RLOAD,ATMOCO2,PARA,PARB)
    resistance = getResistance(value_pin,RLOAD)	
    ppm = getPPM(PARA,RZERO,PARB,value_pin,RLOAD)	
    correctedPPM = getCorrectedPPM(t,h,CORA,CORB,CORC,CORD,CORE,CORF,CORG,value_pin,RLOAD,PARA,RZERO,PARB)
-   if ppm > 10:
-       buzzer.beep()
-   else: 
-       buzzer.off()
    print("\n h,t: %s  %s \n" %(h,t))
    print("\n MQ135 Gas Sensor:\n")
    print("\t MQ135 RZero: %s" % round(rzero))
@@ -168,6 +165,11 @@ def main():
    print("\t Resistance: %s" % round(resistance))
    print("\t PPM: %s" % round(ppm))
    print("\t Corrected PPM: %s ppm" % round(correctedPPM))
+   #Alarm !!!!!!!!!!!!!!
+   if ppm > 400:
+       buzzer.beep()
+   else: 
+       buzzer.off()
    time.sleep(1)
 if __name__ == "__main__":
 	main()
