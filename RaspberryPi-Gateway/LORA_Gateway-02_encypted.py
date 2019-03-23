@@ -34,13 +34,6 @@ from SX127x.board_config import BOARD2 as BOARD
 BOARD.setup()
 BOARD.reset()
 import mysql.connector
-mydb = mysql.connector.connect(
-  host="35.220.202.217",
-  user="root",
-  passwd="1234",
-  database="project_loraweb"
-)
-
 # Function insert data to google cloud from gateway
 def insertGgClouddb(cabin_id,tem,humi,light,co):
   mycursor = mydb.cursor()
