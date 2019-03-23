@@ -21,8 +21,8 @@
 # You should have received a copy of the GNU General Public License along with pySX127.  If not, see
 # <http://www.gnu.org/licenses/>.
 
-from SX127x.LoRa import LoRa
-from SX127x.board_config import BOARD
+from SX127x.LoRa import LoRa2 as LoRa 
+from SX127x.board_config import BOARD2 as BOARD 
 import argparse
 
 BOARD.setup()
@@ -46,3 +46,4 @@ else:
     print(lora)
 
 BOARD.teardown()
+

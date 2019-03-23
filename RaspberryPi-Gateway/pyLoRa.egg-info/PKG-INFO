@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: pyLoRa
-Version: 0.2.2
+Version: 0.2.5
 Summary: This is a python interface to the Ai-Thinker Ra-02 Modules LoRa long range, low power transceiver family. This module uses SX1278 IC and works on a 433MHz frequency.
 Home-page: https://github.com/rpsreal/pySX127x
 Author: Rui Silva
@@ -56,13 +56,13 @@ Description: # This fork - pyLoRa
         |        MOSI       | GPIO 10       |        MOSI       | GPIO 10       |
         |        MISO       | GPIO 9        |        MISO       | GPIO 9        |
         |     SCK (SCLK)    | GPIO 11       |     SCK (SCLK)    | GPIO 11       |
-        |        NSS        | GPIO 7 (CE1)  |        NSS        | GPIO 8 (CE0)  |
-        |     DIO0 (IRQ)    | GPIO 25       |     DIO0 (IRQ)    | GPIO 2        |
-        |        DIO1       | GPIO 24       |        DIO1       | GPIO 3        |
-        |        DIO2       | GPIO 23       |        DIO2       | GPIO 14       |
-        |        DIO3       | GPIO 18       |        DIO3       | GPIO 15       |
-        |     RST (Reset)   | GPIO 22       |     RST (Reset)   | GPIO 4        |
-        |        LED        | GPIO 27       |        LED        | GPIO 17       |
+        |        NSS        | GPIO 8 (CE0)  |        NSS        | GPIO 7 (CE1)  |
+        |     DIO0 (IRQ)    | GPIO 4        |     DIO0 (IRQ)    | GPIO 23       |
+        |        DIO1       | GPIO 17       |        DIO1       | GPIO 24       |
+        |        DIO2       | GPIO 18       |        DIO2       | GPIO 25       |
+        |        DIO3       | GPIO 27       |        DIO3       | GPIO 5        |
+        |     RST (Reset)   | GPIO 22       |     RST (Reset)   | GPIO 6        |
+        |        LED        | GPIO 13       |        LED        | GPIO 19       |
         
         LED external with 1k ohm or 330ohm (optional)
         

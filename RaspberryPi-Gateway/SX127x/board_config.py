@@ -33,18 +33,18 @@ class BOARD:
         This is the Raspberry Pi board with one LED and a Ra-02 Lora.
     """
     # Note that the BCOM numbering for the GPIOs is used.
-    DIO0 = 25   # RaspPi GPIO 25
-    DIO1 = 24   # RaspPi GPIO 24
-    DIO2 = 23   # RaspPi GPIO 23
-    DIO3 = 18   # RaspPi GPIO 18
+    DIO0 = 4   # RaspPi GPIO 4
+    DIO1 = 17   # RaspPi GPIO 17
+    DIO2 = 18   # RaspPi GPIO 18
+    DIO3 = 27   # RaspPi GPIO 27
     RST  = 22   # RaspPi GPIO 22
-    LED  = 27   # RaspPi GPIO 27 connects to the LED and a resistor (1kohm or 330ohm)
+    LED  = 13   # RaspPi GPIO 13 connects to the LED and a resistor (1kohm or 330ohm)
     #SWITCH = 4  # RaspPi GPIO 4 connects to a switch - not necessary
 
     # The spi object is kept here
     spi = None
     SPI_BUS=0
-    SPI_CS=1
+    SPI_CS=0
     
     # tell pySX127x here whether the attached RF module uses low-band (RF*_LF pins) or high-band (RF*_HF pins).
     # low band (called band 1&2) are 137-175 and 410-525
@@ -162,18 +162,18 @@ class BOARD2:
         This is the Raspberry Pi board with one LED and a Ra-02 Lora.
     """
     # Note that the BCOM numbering for the GPIOs is used.
-    DIO0 = 2   # RaspPi GPIO 2
-    DIO1 = 3   # RaspPi GPIO 3                                                                                         
-    DIO2 = 14   # RaspPi GPIO 24
-    DIO3 = 15   # RaspPi GPIO 15
-    RST  = 4   # RaspPi GPIO 4
-    LED  = 17   # RaspPi GPIO 17 connects to the LED and a resistor (1kohm or 330ohm)
+    DIO0 = 23   # RaspPi GPIO 23
+    DIO1 = 24   # RaspPi GPIO 24                                                                                         
+    DIO2 = 25   # RaspPi GPIO 25
+    DIO3 = 5   # RaspPi GPIO 5
+    RST  = 6   # RaspPi GPIO 6
+    LED  = 19   # RaspPi GPIO 19 connects to the LED and a resistor (1kohm or 330ohm)
     #SWITCH = 4  # RaspPi GPIO 4 connects to a switch - not necessary
 
     # The spi object is kept here
     spi = None
     SPI_BUS=0
-    SPI_CS=0
+    SPI_CS=1
     
     # tell pySX127x here whether the attached RF module uses low-band (RF*_LF pins) or high-band (RF*_HF pins).
     # low band (called band 1&2) are 137-175 and 410-525
