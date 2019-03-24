@@ -29,9 +29,6 @@ from SX127x.LoRaArgumentParser import LoRaArgumentParser
 # Use BOARD 1
 from SX127x.LoRa import LoRa
 from SX127x.board_config import BOARD
-# Use BOARD 2 (you can use BOARD1 and BOARD2 at the same time)
-#from SX127x.LoRa import LoRa2 as LoRa
-#from SX127x.board_config import BOARD2 as BOARD
 import Adafruit_DHT
 import sys
 import math
