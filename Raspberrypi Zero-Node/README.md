@@ -43,4 +43,28 @@ The most important modem configuration parameters are:
 | | |
 | @todo            |                              |
 
+## Config parameter file:
+Open file config.ini in the folder and config lora transmission parameter for node **Parameter configuration for node 1 and node 2 must be match up with parameter configuration in the file config.ini in gateway**
+```bash
+config.ini
+######################
+#Parameters config for node:
+# frequency: 430 - 510 MHz
+# band_width: [ BW.BW7_8 , BW.BW10_4, BW.BW15_6, BW.BW20_8, BW.BW31_15, BW.BW41_7, BW.BW62_5, BW.BW125, BW.BW250, BW.BW500]
+# coding_rate: [CODING_RATE.CR4_5, CODING_RATE.CR4_6, CODING_RATE.CR4_7, CODING_RATE.CR4_8]
+# spreading_factor: 7 - 12
+######################
+#Gateway node 1 config
+[Node1]
+frequency: 434.0
+band_width: BW.BW250
+coding_rate: CODING_RATE.CR4_8
+spreading_factor: 12
+#Gateway node 2 config
+[Node2]
+frequency: 440.0
+band_width: BW.BW250
+coding_rate: CODING_RATE.CR4_8
+spreading_factor: 12
+```
 
