@@ -12,7 +12,7 @@ sudo apt-get install python-mysqldb
 sudo pip3 install mysql	
 sudo pip3 install adafruit-circuitpython-ads1x15 	
 sudo pip3 install Adafruit_DHT	
-```	```
+```	
 
 
  ### Installation:	
@@ -28,15 +28,6 @@ For **encrypted versions only** it is necessary to perform the following install
 pip3 install pycryptodome	
 pip3 install pycrypto	
 ```
-# Class Reference	
-
-
- The interface to the SX127x LoRa modem is implemented in the class `SX127x.LoRa.LoRa`.	
-@@ -43,40 +257,156 @@ The most important modem configuration parameters are:
-| | |	
-| @todo            |                             
-
-
  ## Config parameter file:	
 Open file config.ini in the folder and config lora transmission parameter for gateway 	
 </br>	
