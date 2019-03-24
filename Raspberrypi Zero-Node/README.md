@@ -1,4 +1,4 @@
-## Easy setup on Raspberry Pi:
+## Easy setup on Raspberry Pi Node:
 ```bash
 sudo raspi-config
 -- Interfacing Options
@@ -10,7 +10,7 @@ sudo apt-get install xrdp
 sudo apt-get install python-mysqldb
 sudo pip3 install mysql
 sudo pip3 install adafruit-circuitpython-ads1x15 
-pip3 install Adafruit_DHT
+sudo pip3 install Adafruit_DHT
 ```
 
 ### Installation:
