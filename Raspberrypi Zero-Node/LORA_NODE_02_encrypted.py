@@ -43,6 +43,7 @@ from gpiozero import LightSensor
 import json
 import _thread
 from time import sleep
+import configparser
 
 #Create light sensor object
 ldr = LightSensor(6)
@@ -292,15 +293,15 @@ lora = mylora(verbose=False)
 #args = parser.parse_args(lora)
 #lora.set_mode(MODE.STDBY)
 #lora.set_pa_config(pa_select=1, max_power=21, output_power=15)
-# parse config parameter for node2 in gateway
+# parse config parameter for node1 in gateway
 config = configparser.ConfigParser()
 config.read("config.ini")
 #     Slow+long range  Bw = 125 kHz, Cr = 4/8, Sf = 4096chips/symbol, CRC on. 13 dBm
 lora.set_pa_config(pa_select=1, max_power=21, output_power=15)
-lora.set_freq(config['Node2']['frequency'])
-lora.set_bw(config['Node2']['bandwidth'])
-lora.set_coding_rate(config['Node2']['coding_rate'])
-lora.set_spreading_factor(config['Node2']['spreading_factor'])
+lora.set_freq(float(config['Node2']['frequency']))
+lora.set_bw(int(config['Node2']['bandwidth']))
+lora.set_coding_rate(int(config['Node2']['coding_rate']))
+lora.set_spreading_factor(int(config['Node2']['spreading_factor']))
 lora.set_rx_crc(True)
 #lora.set_lna_gain(GAIN.G1)
 #lora.set_implicit_header_mode(False)
@@ -328,4 +329,3 @@ finally:
     print("Exit")
     lora.set_mode(MODE.SLEEP)
 BOARD.teardown()
-
