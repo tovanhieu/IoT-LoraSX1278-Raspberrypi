@@ -25,6 +25,7 @@ import time, base64, sys
 from Crypto.Cipher import AES
 from SX127x.constants import add_lookup, MODE, BW, CODING_RATE, GAIN, PA_SELECT, PA_RAMP, MASK, REG
 from SX127x.LoRa import set_bit, getter, setter
+import configparser
 
 # Use BOARD 1
 from SX127x.LoRa import LoRa
@@ -131,13 +132,15 @@ class mylora(LoRa):
             time.sleep(10)
 
 lora = mylora(verbose=False)
-
+# parse config parameter for node1 in gateway
+config = configparser.ConfigParser()
+config.read("config.ini")
 #     Slow+long range  Bw = 125 kHz, Cr = 4/8, Sf = 4096chips/symbol, CRC on. 13 dBm
 lora.set_pa_config(pa_select=1, max_power=21, output_power=15)
-lora.set_bw(BW.BW125)
-lora.set_coding_rate(CODING_RATE.CR4_8)
-lora.set_spreading_factor(12)
-lora.set_rx_crc(True)
+lora.set_freq(float(config['Node1']['frequency']))
+lora.set_bw(int(config['Node1']['bandwidth']))
+lora.set_coding_rate(int(config['Node1']['coding_rate']))
+lora.set_spreading_factor(int(config['Node1']['spreading_factor']))
 #lora.set_lna_gain(GAIN.G1)
 #lora.set_implicit_header_mode(False)
 lora.set_low_data_rate_optim(True)
