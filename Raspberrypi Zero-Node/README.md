@@ -1,3 +1,4 @@
+# First time setup:
 ## Easy setup on Raspberry Pi Node:
 ```bash
 sudo raspi-config
