@@ -6,7 +6,7 @@ The project contain two properties:
 ##### https://github.com/tovanhieu/LoraProject/blob/master/Raspberrypi%20Zero-Node/LORA_NODE_02_encrypted.py
 + Gateway: Using raspberry Pi 3 B+, after collects data from node gateway analyze data and sends to the cloud, we use Firebase and googlecloud  to save data in the cloud and share with the web and the mobie app via API.
 ##### https://github.com/tovanhieu/LoraProject/blob/master/RaspberryPi-Gateway/LORA_Gateway-01_encrypted.py
-##### hhttps://github.com/tovanhieu/LoraProject/blob/master/RaspberryPi-Gateway/LORA_Gateway-02_encypted.py
+##### https://github.com/tovanhieu/LoraProject/blob/master/RaspberryPi-Gateway/LORA_Gateway-02_encypted.py
 ### Author 
 To Van Hieu
 ### Update 
