@@ -1,5 +1,5 @@
 # First time setup:
-## Easy setup on Raspberry Pi Node:
+### Easy setup essential python packet on Raspberry Pi Node:
 ```bash
 sudo raspi-config
 -- Interfacing Options
