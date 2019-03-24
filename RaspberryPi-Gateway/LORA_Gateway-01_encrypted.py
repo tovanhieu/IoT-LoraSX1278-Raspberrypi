@@ -38,7 +38,7 @@ import mysql.connector
 def insertGgClouddb(cabin_id,tem,humi,light,co):
   mycursor = mydb.cursor()
   sql = "INSERT INTO tbl_cabin (train_id, cabin_id, temp, humi, longitude, latitude, co) VALUES (%s,%s,%s,%s,%s,%s,%s)"
-  val = [ (1,cabin_id, tem, humi,'100','120', co2) ]
+  val = [ (1,cabin_id, tem, humi,'100','120', co) ]
   mycursor.executemany(sql, val)
   mydb.commit()
 
