@@ -190,7 +190,7 @@ def parse_msg(msg):
 """
 def get_node_parameter(correctedPPM):
    # value_pin = map((value_ads.value - 565), 0, 26690, 0, 1023) # 565 / 535 fix value
-    msg = json.dumps({'id' : 1 ,'t' : t ,'h' : h ,'l' : ldr.value , 'p' : round(correctedPPM)})
+    msg = json.dumps({'id' : 2 ,'t' : t ,'h' : h ,'l' : ldr.value , 'p' : round(correctedPPM)})
     if correctedPPM > 400:
        buzzer.beep()
     else: 
