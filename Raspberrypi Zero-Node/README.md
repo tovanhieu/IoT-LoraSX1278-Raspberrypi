@@ -8,8 +8,6 @@ sudo raspi-config
 --- enable SSH
 sudo apt-get install python-dev python3-dev
 sudo apt-get install xrdp
-sudo apt-get install python-mysqldb
-sudo pip3 install mysql
 sudo pip3 install adafruit-circuitpython-ads1x15 
 sudo pip3 install Adafruit_DHT
 ```
