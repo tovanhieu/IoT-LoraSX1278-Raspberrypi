@@ -44,7 +44,8 @@ The most important modem configuration parameters are:
 | @todo            |                              |
 
 ## Config parameter file:
-Open file config.ini in the folder and config lora transmission parameter for node **Parameter configuration for node 1 and node 2 must be match up with parameter configuration in the file config.ini in gateway**
+Open file config.ini in the folder and config lora transmission parameter for node 
+**Parameter configuration for node 1 and node 2 must be match up with parameter configuration in the file config.ini in gateway**
 ```bash
 config.ini
 ######################
