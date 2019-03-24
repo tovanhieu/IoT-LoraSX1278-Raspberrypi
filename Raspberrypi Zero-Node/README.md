@@ -67,4 +67,9 @@ band_width: BW.BW250
 coding_rate: CODING_RATE.CR4_8
 spreading_factor: 12
 ```
+## Start monitor and transmitssion from node:
+```bash
+sudo python3 LORA_NODE_01_encrypted.py (for node 1)
+sudo python3 LORA_NODE_02_encrypted.py (for node 2)
+```
 
