@@ -138,7 +138,7 @@ config.read("config.ini")
 #     Slow+long range  Bw = 125 kHz, Cr = 4/8, Sf = 4096chips/symbol, CRC on. 13 dBm
 lora.set_pa_config(pa_select=1, max_power=21, output_power=15)
 lora.set_freq(float(config['Node1']['frequency']))
-lora.set_bw(int(config['Node1']['bandwidth']))
+lora.set_bw(int(config['Node1']['band_width']))
 lora.set_coding_rate(int(config['Node1']['coding_rate']))
 lora.set_spreading_factor(int(config['Node1']['spreading_factor']))
 #lora.set_lna_gain(GAIN.G1)
