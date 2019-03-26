@@ -10,7 +10,7 @@ The project contain two properties:
 ### Author 
 To Van Hieu
 ### Update 
-11/2018
+03/2019
 ## Referencece Links
 #### https://github.com/rpsreal/pySX127x
 #### https://pypi.org/project/pyLoRa/
