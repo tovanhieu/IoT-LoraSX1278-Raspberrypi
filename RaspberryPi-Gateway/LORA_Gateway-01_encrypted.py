@@ -27,13 +27,16 @@ from SX127x.constants import add_lookup, MODE, BW, CODING_RATE, GAIN, PA_SELECT,
 from SX127x.LoRa import set_bit, getter, setter
 import json
 import configparser
-
 # Use BOARD 1
 from SX127x.LoRa import LoRa
 from SX127x.board_config import BOARD
 BOARD.setup()
 BOARD.reset()
 import mysql.connector
+import logging
+
+#Initialize logging
+logging.basicConfig(filename='gateway.log', filemode='w', format='%(process)d-%(asctime)s-%(levelname)s-%(message)s', datefmt='%d-%b-%y %H:%M:%S')
 # Function insert data to google cloud from gateway
 def insertGgClouddb(cabin_id,tem,humi,light,co):
   mycursor = mydb.cursor()
@@ -48,29 +51,26 @@ class mylora(LoRa):
         self.set_mode(MODE.SLEEP)
         self.set_dio_mapping([0] * 6)
         self.var=0
-        self.key = '1234567890123456'
+        self.key = b'1234567890123456'
 
     def on_rx_done(self):
         BOARD.led_on()
-        #print("\nRxDone")
+        logging.info("\nRxDone")
         self.clear_irq_flags(RxDone=1)
         payload = self.read_payload(nocheck=True)
         mens=payload[4:-1] #to discard \xff\xff\x00\x00 and \x00 at the end
         mens= bytes(mens).decode("utf-8",'ignore') + '='
-        print(mens)
-        print(len(mens))
-        cipher = AES.new(self.key)
+        cipher = AES.new(self.key,AES.MODE_ECB)
         decodemens=base64.b64decode(mens)
         decoded = cipher.decrypt(decodemens)
         decoded = bytes(decoded).decode("utf-8",'ignore')
-        print ("== RECEIVE: ", mens, "  s|  Decoded: ",decoded )
+        logging.info("RECEIVE: {} | Decoded: {}".format(mens,decoded))
         msg = json.loads(decoded)
-        print(msg)
         insertGgClouddb(msg['id'],msg['t'],msg['h'],msg['l'],msg['p'])
         BOARD.led_off()
         time.sleep(2) # Wait for the client be ready
         msg_text = 'ACK             ' # 16 char
-        cipher = AES.new(self.key)
+        cipher = AES.new(self.key,AES.MODE_ECB)
         encoded = base64.b64encode(cipher.encrypt(msg_text))
         lista=list(encoded)
         lista.insert(0,0)
@@ -79,10 +79,8 @@ class mylora(LoRa):
         lista.insert(0,255)
         lista.append(0)
         self.write_payload(lista)
-        #self.write_payload([255, 255, 0, 0, 65, 67, 75, 0]) # Send ACK
         self.set_mode(MODE.TX)
-        print ("== SEND: ", msg_text, "  |  Encoded: ", encoded.decode("utf-8",'ignore'))
-        print ("\n")
+        logging.info("== SEND: {} | Encoded: {}".format(msg_text, encoded.decode("utf-8",'ignore')))
         self.var=1
 
     def on_tx_done(self):
@@ -122,9 +120,8 @@ class mylora(LoRa):
                 lista.insert(0,255)
                 lista.append(0)
                 self.write_payload(lista)
-                #self.write_payload([255, 255, 0, 0, 57, 90, 54, 118, 106, 71, 75, 51, 87, 75, 107, 79, 99, 55, 76, 122, 112, 65, 86, 88, 79, 81, 61, 61, 0]) # Send INF
                 self.set_mode(MODE.TX)
-                print ("== SEND: INF                |  Encoded: ", encoded)
+                logging.info("== SEND: INF           | Encoded: ".format(encoded))
                 time.sleep(3) # there must be a better solution but sleep() works
                 self.reset_ptr_rx()
                 self.set_mode(MODE.RXCONT) # Receiver mode
