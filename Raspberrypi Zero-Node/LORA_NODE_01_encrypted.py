@@ -238,7 +238,7 @@ class mylora(LoRa):
             ppm = getPPM(PARA,RZERO,PARB,value_pin,RLOAD)	
             correctedPPM = getCorrectedPPM(t,h,CORA,CORB,CORC,CORD,CORE,CORF,CORG,value_pin,RLOAD,PARA,RZERO,PARB) 
             msg = get_node_parameter(correctedPPM) # Contain string char value divisable 16       
-            print(len(msg))
+            #print(len(msg))
             cipher = AES.new(self.key, AES.MODE_ECB)
             encoded = base64.b64encode(cipher.encrypt(msg))
             lista=list(encoded)
