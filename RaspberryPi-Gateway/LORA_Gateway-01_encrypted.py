@@ -60,7 +60,7 @@ class mylora(LoRa):
         payload = self.read_payload(nocheck=True)
         mens=payload[4:-1] #to discard \xff\xff\x00\x00 and \x00 at the end
         mens= bytes(mens).decode("utf-8",'ignore') + '='
-        cipher = AES.new(self.key,AES.MODE_ECB)
+        cipher = AES.new(self.key)
         decodemens=base64.b64decode(mens)
         decoded = cipher.decrypt(decodemens)
         decoded = bytes(decoded).decode("utf-8",'ignore')
@@ -70,7 +70,7 @@ class mylora(LoRa):
         BOARD.led_off()
         time.sleep(2) # Wait for the client be ready
         msg_text = 'ACK             ' # 16 char
-        cipher = AES.new(self.key,AES.MODE_ECB)
+        cipher = AES.new(self.key)
         encoded = base64.b64encode(cipher.encrypt(msg_text))
         lista=list(encoded)
         lista.insert(0,0)
@@ -111,7 +111,7 @@ class mylora(LoRa):
         while True:
             while (self.var==0):
                 msg_text = 'INF             '
-                cipher = AES.new(self.key,AES.MODE_ECB)
+                cipher = AES.new(self.key)
                 encoded = base64.b64encode(cipher.encrypt(msg_text))
                 lista=list(encoded)
                 lista.insert(0,0)
