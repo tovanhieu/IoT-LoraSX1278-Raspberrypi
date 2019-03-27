@@ -2,7 +2,7 @@
 
 """ This program sends a response whenever it receives the "INF" """
 
-# Copyright 2018 Rui Silva.
+# Copyright 2019 To Van Hieu.
 #
 # This file is part of rpsreal/pySX127x, fork of mayeranalytics/pySX127x.
 #
