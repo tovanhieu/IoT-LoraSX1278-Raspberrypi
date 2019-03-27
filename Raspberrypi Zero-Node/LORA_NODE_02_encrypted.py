@@ -238,7 +238,7 @@ class mylora(LoRa):
             ppm = getPPM(PARA,RZERO,PARB,value_pin,RLOAD)	
             correctedPPM = getCorrectedPPM(t,h,CORA,CORB,CORC,CORD,CORE,CORF,CORG,value_pin,RLOAD,PARA,RZERO,PARB) 
             msg = get_node_parameter(correctedPPM) # Contain string char value divisable 16       
-            print(len(msg))
+            #print(len(msg))
             cipher = AES.new(self.key, AES.MODE_ECB)
             encoded = base64.b64encode(cipher.encrypt(msg))
             lista=list(encoded)
@@ -249,7 +249,7 @@ class mylora(LoRa):
             lista.append(0)
             self.write_payload(lista)
             selfco.set_mode(MODE.TX)
-            result =  '== SEND: DATA FROM NODE {} HUM: {} TEM: {}  LIGHT: {} PPM:  {}   |  Ended: {}'.format(1,h,t,ldr.value,round(correctedPPM), encoded.decode("utf-8",'ignore'))
+            result =  '== SEND: DATA FROM NODE {} HUM: {} TEM: {}  LIGHT: {} PPM:  {}   |  Ended: {}'.format(2,h,t,ldr.value,round(correctedPPM), encoded.decode("utf-8",'ignore'))
             print(result)  
         if decoded=="ACK             ":
             print("\n")
