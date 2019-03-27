@@ -48,7 +48,7 @@ class mylora(LoRa):
         self.set_mode(MODE.SLEEP)
         self.set_dio_mapping([0] * 6)
         self.var=0
-        self.key = b'1234567890123456'
+        self.key = '1234567890123456'
 
     def on_rx_done(self):
         BOARD.led_on()
@@ -59,7 +59,7 @@ class mylora(LoRa):
         mens= bytes(mens).decode("utf-8",'ignore') + '='
         print(mens)
         print(len(mens))
-        cipher = AES.new(self.key,AES.MODE_ECB)
+        cipher = AES.new(self.key)
         decodemens=base64.b64decode(mens)
         decoded = cipher.decrypt(decodemens)
         decoded = bytes(decoded).decode("utf-8",'ignore')
@@ -70,7 +70,7 @@ class mylora(LoRa):
         BOARD.led_off()
         time.sleep(2) # Wait for the client be ready
         msg_text = 'ACK             ' # 16 char
-        cipher = AES.new(self.key,AES.MODE_ECB)
+        cipher = AES.new(self.key)
         encoded = base64.b64encode(cipher.encrypt(msg_text))
         lista=list(encoded)
         lista.insert(0,0)
