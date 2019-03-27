@@ -2,7 +2,7 @@
 
 """ This is a utility script for the SX127x (LoRa mode). It dumps all registers. """
 
-# Copyright 2015 Mayer Analytics Ltd.
+# Copyright 2019 To Van Hieu.
 #
 # This file is part of pySX127x.
 #
