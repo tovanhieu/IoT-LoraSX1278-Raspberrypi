@@ -44,6 +44,10 @@ import json
 import _thread
 from time import sleep
 import configparser
+import logging
+
+#Initialize logging
+logging.basicConfig(filename='node.log', filemode='w', format='%(process)d-%(asctime)s-%(levelname)s-%(message)s', datefmt='%d-%b-%y %H:%M:%S')
 
 #Create light sensor object
 ldr = LightSensor(6)
@@ -190,7 +194,6 @@ def parse_msg(msg):
 @return The string parametter value from node
 """
 def get_node_parameter(correctedPPM):
-   # value_pin = map((value_ads.value - 565), 0, 26690, 0, 1023) # 565 / 535 fix value
     msg = json.dumps({'id' : 2 ,'t' : t ,'h' : h ,'l' : ldr.value , 'p' : round(correctedPPM)})
     if correctedPPM > 400:
        buzzer.beep()
@@ -207,7 +210,6 @@ def get_node_parameter(correctedPPM):
 ###############
 BOARD.setup()
 BOARD.reset()
-#parser = LoRaArgumentParser("LoRa sender node.")
 class mylora(LoRa):
     def __init__(self, verbose=False):
         super(mylora, self).__init__(verbose)
@@ -226,10 +228,10 @@ class mylora(LoRa):
         decodemens=base64.b64decode(mens)
         decoded = cipher.decrypt(decodemens)
         decoded = bytes(decoded).decode("utf-8",'ignore')
-        print ("== RECEIVE: ", mens, "  |  Decoded: ",decoded )
+        logging.info("== RECEIVE: {} | Decode: {}".format(mens,decoded))
         BOARD.led_off()
         if decoded=="INF             ":
-            print("Received data request INF - going to send mens data from node:      ")
+            logging.info("Received data request INF - going to send mens data from node 2: ")
             time.sleep(4)
             value_pin = map((value_ads.value - 500), 0, 26690, 0, 1023) # 565 / 535 fix value
             rzero = getRZero(value_pin,RLOAD,ATMOCO2,PARA,PARB)
@@ -238,7 +240,6 @@ class mylora(LoRa):
             ppm = getPPM(PARA,RZERO,PARB,value_pin,RLOAD)	
             correctedPPM = getCorrectedPPM(t,h,CORA,CORB,CORC,CORD,CORE,CORF,CORG,value_pin,RLOAD,PARA,RZERO,PARB) 
             msg = get_node_parameter(correctedPPM) # Contain string char value divisable 16       
-            #print(len(msg))
             cipher = AES.new(self.key, AES.MODE_ECB)
             encoded = base64.b64encode(cipher.encrypt(msg))
             lista=list(encoded)
@@ -248,9 +249,8 @@ class mylora(LoRa):
             lista.insert(0,255)
             lista.append(0)
             self.write_payload(lista)
-            selfco.set_mode(MODE.TX)
-            result =  '== SEND: DATA FROM NODE {} HUM: {} TEM: {}  LIGHT: {} PPM:  {}   |  Ended: {}'.format(2,h,t,ldr.value,round(correctedPPM), encoded.decode("utf-8",'ignore'))
-            print(result)  
+            self.set_mode(MODE.TX)
+            logging.info('== SEND: DATA FROM NODE {} HUM: {} TEM: {}  LIGHT: {} PPM:  {}   |  Ended: {}'.format(2,h,t,ldr.value,round(correctedPPM), encoded.decode("utf-8",'ignore')))    
         if decoded=="ACK             ":
             print("\n")
             
@@ -311,11 +311,8 @@ lora.set_low_data_rate_optim(True)
 #lora.set_pa_config(pa_select=1)
 
 
-# print(lora)
+logging.info("Node 2 start: {}".format(lora))
 assert(lora.get_agc_auto_on() == 1)
-
-# try: input("Press enter to start...")
-# except: pass
 
 try:
     print("START")
