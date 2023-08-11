@@ -1,4 +1,4 @@
-# Lora Project
+# Lora transmision project
 This is Lora project for study and research purpose.
 The project contain two properties:
 + Node: Using raspberry Pi zero with Lora-Ra 02 - SX1278, the node collects data including: temperature, humidity, percentage CO atsmophere,.... and sends to the gateway node.
