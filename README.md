@@ -6,18 +6,18 @@ _**This IoT project uses LoRa transmission technology for studying and researchi
 Install it using pip or pip3, but I recommend using pip3
 </br>
 </br>
-[![License](https://img.shields.io/badge/license-MIT_License-purple)]
-[![Python](https://img.shields.io/badge/python-3.8%2B-blue)]
-[![Pip or Pip3](https://img.shields.io/badge/pip-23.2.1-green)]
-[![Python dev tools](https://img.shields.io/badge/python_dev_tools-2023.3.24-yellow)]
-[![MySQL python](https://img.shields.io/badge/MySQL_python-1.2.5-orange)]
-[![Mysql connector python](https://img.shields.io/badge/mysql_connector_python-8.1.0-purple)]
-[![RPi.GPIO](https://img.shields.io/badge/RPi.GPIO-0.7.1-pink)]
-[![Brown](https://img.shields.io/badge/spidev-3.6-brown)]
-[![PyLoRa](https://img.shields.io/badge/pyLoRa-0.3.1-white)]
-[![Pycryptodom](https://img.shields.io/badge/pycryptodome-3.18.0-cyan)]
-[![Pycrypto](https://img.shields.io/badge/pycrypto-2.6.1-teal)]
-[![Message](https://img.shields.io/badge/Clone_the_project_and_follow_my_guides_step_by_step_%F0%9F%A7%90-8A2BE2)]
+![License](https://img.shields.io/badge/license-MIT_License-purple)
+![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+![Pip or Pip3](https://img.shields.io/badge/pip-23.2.1-green)
+![Python dev tools](https://img.shields.io/badge/python_dev_tools-2023.3.24-yellow)
+![MySQL python](https://img.shields.io/badge/MySQL_python-1.2.5-orange)
+![Mysql connector python](https://img.shields.io/badge/mysql_connector_python-8.1.0-purple)
+![RPi.GPIO](https://img.shields.io/badge/RPi.GPIO-0.7.1-pink)
+![Brown](https://img.shields.io/badge/spidev-3.6-brown)
+![PyLoRa](https://img.shields.io/badge/pyLoRa-0.3.1-white)
+![Pycryptodom](https://img.shields.io/badge/pycryptodome-3.18.0-cyan)
+![Pycrypto](https://img.shields.io/badge/pycrypto-2.6.1-teal)
+![Message](https://img.shields.io/badge/Clone_the_project_and_follow_my_guides_step_by_step_%F0%9F%A7%90-8A2BE2)
 ### Use cases for the project
 There are two use cases I use for this project: **_Forest fire warning system_** and **_Smart railway transmission_**.
 This is the proposal architecture:
