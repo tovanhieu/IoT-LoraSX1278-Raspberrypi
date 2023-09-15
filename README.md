@@ -24,7 +24,7 @@ This is the proposal architecture:
 ![SmartRaillWay-Ar](https://github.com/tovanhieu/LoraSX1278-Raspberrypi/assets/26000753/db29cfce-e03b-4f91-b2c6-8f8bd13932bb)
 
 The project contains two properties:
-1. **Node**: I use Raspberry Pi Zero integrated with module Lora-Ra 02 SX1278 and sensors (), the node will collect data from sensors include: temperature, humidity, percentage CO atsmophere,.... and sends to the Gateway. Source code of two nodes in this implementation of the project here [Node 1](https://github.com/tovanhieu/LoraProject/blob/master/Raspberrypi%20Zero-Node/LORA_NODE_01_encrypted.py) and [Node2(https://github.com/tovanhieu/LoraProject/blob/master/Raspberrypi%20Zero-Node/LORA_NODE_02_encrypted.py)
+1. **Node**: I use Raspberry Pi Zero integrated with module Lora-Ra 02 SX1278 and sensors (), the node will collect data from sensors include: temperature, humidity, percentage CO atsmophere,.... and sends to the Gateway. Source code of two nodes in this implementation of the project here [Node 1](https://github.com/tovanhieu/LoraProject/blob/master/Raspberrypi%20Zero-Node/LORA_NODE_01_encrypted.py) and [Node 2](https://github.com/tovanhieu/LoraProject/blob/master/Raspberrypi%20Zero-Node/LORA_NODE_02_encrypted.py)
 2. **Gateway**: Using raspberry Pi 3 B+ integrated with Lora-Ra 02 SX1278, after collects data from nodes, gateway will capture and analyze data sending to the Web Server in Cloud, I use Firebase and Googlecloud to store and share datas with the monitor web app and the mobie app via API.
 ##### https://github.com/tovanhieu/LoraProject/blob/master/RaspberryPi-Gateway/LORA_Gateway-01_encrypted.py
 ##### https://github.com/tovanhieu/LoraProject/blob/master/RaspberryPi-Gateway/LORA_Gateway-02_encypted.py
