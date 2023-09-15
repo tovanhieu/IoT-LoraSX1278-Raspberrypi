@@ -1,5 +1,12 @@
-# Lora-SX1278 transmission project Author: Hieu (Toni) 📡
+# IoT Lora-SX1278 transmission project 📡
+## Author: Hieu (Toni)
+
+_**This IoT project uses LoRa transmission technology for studying and researching purpose. You can modify and contribute to my code as long as you include the original copyright notice and disclaimer.**_
 #### Nedded python packages for the project:
+Install it using pip or pip3, but I recommend using pip3
+</br>
+</br>
+[![License](https://img.shields.io/badge/license-MIT_License-purple)]
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue)]
 [![Pip or Pip3](https://img.shields.io/badge/pip-23.2.1-green)]
 [![Python dev tools](https://img.shields.io/badge/python_dev_tools-2023.3.24-yellow)]
@@ -11,21 +18,17 @@
 [![Pycryptodom](https://img.shields.io/badge/pycryptodome-3.18.0-cyan)]
 [![Pycrypto](https://img.shields.io/badge/pycrypto-2.6.1-teal)]
 [![Message](https://img.shields.io/badge/Clone_the_project_and_follow_my_guides_step_by_step_%F0%9F%A7%90-8A2BE2)]
+### Use cases for the project
+There are two use cases I use for this project: **_Forest fire warning system_** and **_Smart railway transmission_**.
+This is the proposal architecture:
+![SmartRaillWay-Ar](https://github.com/tovanhieu/LoraSX1278-Raspberrypi/assets/26000753/db29cfce-e03b-4f91-b2c6-8f8bd13932bb)
 
-
-
-
-
-
-
-This Lora-SX1278 project uses for studying and researching purpose.
 The project contains two properties:
-+ Node: Using raspberry Pi zero integrated with Lora-Ra 02 SX1278, the node collects data from sensor include: temperature, humidity, percentage CO atsmophere,.... and sends to the gateway node.
-##### https://github.com/tovanhieu/LoraProject/blob/master/Raspberrypi%20Zero-Node/LORA_NODE_01_encrypted.py
-##### https://github.com/tovanhieu/LoraProject/blob/master/Raspberrypi%20Zero-Node/LORA_NODE_02_encrypted.py
-+ Gateway: Using raspberry Pi 3 B+ integrated with Lora-Ra 02 SX1278, after collects data from nodes, gateway will capture and analyze data sending to the cloud, I use Firebase and googlecloud  to storage data and share with the web and the mobie app via API.
+1. **Node**: I use Raspberry Pi Zero integrated with module Lora-Ra 02 SX1278 and sensors (), the node will collect data from sensors include: temperature, humidity, percentage CO atsmophere,.... and sends to the Gateway. Source code of two nodes in this implementation of the project here [Node 1](https://github.com/tovanhieu/LoraProject/blob/master/Raspberrypi%20Zero-Node/LORA_NODE_01_encrypted.py) and [Node2(https://github.com/tovanhieu/LoraProject/blob/master/Raspberrypi%20Zero-Node/LORA_NODE_02_encrypted.py)
+2. **Gateway**: Using raspberry Pi 3 B+ integrated with Lora-Ra 02 SX1278, after collects data from nodes, gateway will capture and analyze data sending to the Web Server in Cloud, I use Firebase and Googlecloud to store and share datas with the monitor web app and the mobie app via API.
 ##### https://github.com/tovanhieu/LoraProject/blob/master/RaspberryPi-Gateway/LORA_Gateway-01_encrypted.py
 ##### https://github.com/tovanhieu/LoraProject/blob/master/RaspberryPi-Gateway/LORA_Gateway-02_encypted.py
+3. **Web server**: 
 
 ### Last Update 
 08/2023
