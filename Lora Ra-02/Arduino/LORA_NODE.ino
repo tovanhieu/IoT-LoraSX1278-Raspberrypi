@@ -80,11 +80,11 @@ void loop()
     char radiopacket1[4];
     dtostrf(smokevalue,3,2,radiopacket1);
     concatenate_string(radiopacket,radiopacket1);
-    Serial.print("Nong do khong khi: ");
+    Serial.print(" Air quality CO: ");
     Serial.print(smokevalue);
     DHT.read11(dht_apin);     
     float tem = DHT.temperature;
-    Serial.print(" Nhiet do: ");
+    Serial.print(" Temperature: ");
     Serial.print(tem);
     Serial.print(" C ");
     char radiopacket2[5];
@@ -92,7 +92,7 @@ void loop()
     concatenate_string(radiopacket,radiopacket2);
 //    Serial.println(radiopacket);
     float hum = DHT.humidity;
-    Serial.print(" Do am: ");
+    Serial.print("Humidity": ");
     Serial.print(hum);
     Serial.println(" %");
     char radiopacket3[5];
