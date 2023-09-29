@@ -36,6 +36,8 @@ This is the proposal architecture:
 
 ![Screenshot 2023-09-20 152600](https://github.com/tovanhieu/LoraSX1278-Raspberrypi/assets/26000753/c2462c20-ad09-46a0-82a1-a62fbf7feb8b)<br>
 3. **Web server**: Web server will recieve data from gateway and share with Mobile Application via API. The datas are showed and monitored in json format integrated with Firebase database.
+![IoT6](https://github.com/tovanhieu/IoT-LoraSX1278-Raspberrypi/assets/26000753/030de9e4-639f-4e7f-a2a9-ec05a4e0caa9)
+
 
 
 ### Last Update 
