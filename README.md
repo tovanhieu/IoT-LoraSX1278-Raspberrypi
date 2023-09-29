@@ -24,20 +24,19 @@ This is the proposal architecture:
 ![SmartRaillWay-Ar](https://github.com/tovanhieu/LoraSX1278-Raspberrypi/assets/26000753/db29cfce-e03b-4f91-b2c6-8f8bd13932bb)
 
 ### The project contains three properties:
-1. **Node**: I use Raspberry Pi Zero integrated with module Lora-Ra 02 SX1278 and sensors: [LDR](https://www.electronicaembajadores.com/en/Productos/Detalle/SSLDR67/sensors/color-light-sensors/ldr-resistance-5-9-x-7-mm-light-sensor/), [DHT22](https://www.cytrontech.vn/p-dht22-temperature-and-humidity-sensor?currency=VND&gad=1&gclid=CjwKCAjwgZCoBhBnEiwAz35RwhM8Gy4RZTgACKgCrHPCX7Fv3yhTXUskpHNxDMKpxeUEgw8sGi9hShoCt6oQAvD_BwE), [MQ135](https://hshop.vn/products/cam-bien-chat-luong-khong-khi-mq-139), [Buzzer 5v 2505A](https://shopee.vn/C%C3%B2i-Xung-5V-12x25MM-USP-2505A-i.151571719.9926169242). The node will collect data from sensors include: temperature, humidity, percentage CO of smophere,.... and sends to the Gateway. Source code of the nodes implementation in this project you can find [here](https://github.com/tovanhieu/LoraProject/blob/master/Raspberrypi%20Zero-Node/LORA_NODE_01_encrypted.py)<br>
+1. **Node**: We use Raspberry Pi Zero integrated with module Lora-Ra 02 SX1278 and sensors: [LDR](https://www.electronicaembajadores.com/en/Productos/Detalle/SSLDR67/sensors/color-light-sensors/ldr-resistance-5-9-x-7-mm-light-sensor/), [DHT22](https://www.cytrontech.vn/p-dht22-temperature-and-humidity-sensor?currency=VND&gad=1&gclid=CjwKCAjwgZCoBhBnEiwAz35RwhM8Gy4RZTgACKgCrHPCX7Fv3yhTXUskpHNxDMKpxeUEgw8sGi9hShoCt6oQAvD_BwE), [MQ135](https://hshop.vn/products/cam-bien-chat-luong-khong-khi-mq-139), [Buzzer 5v 2505A](https://shopee.vn/C%C3%B2i-Xung-5V-12x25MM-USP-2505A-i.151571719.9926169242). The node will collect data from sensors include: temperature, humidity, percentage CO of smophere,.... and sends to the Gateway. Source code of the nodes implementation in this project you can find [here](https://github.com/tovanhieu/LoraProject/blob/master/Raspberrypi%20Zero-Node/LORA_NODE_01_encrypted.py)<br>
 #### Block diagram
 ![Screenshot 2023-09-20 152042](https://github.com/tovanhieu/LoraSX1278-Raspberrypi/assets/26000753/7314a3fa-8923-4f38-abfd-eb6f5166c908)
 
 ![Screenshot 2023-09-15 153852](https://github.com/tovanhieu/LoraSX1278-Raspberrypi/assets/26000753/d05df0bf-b602-43f0-b2c6-11e40e0fce68)
 
-2. **Gateway**: I use Raspberry Pi 3 B+ integrated with module Lora-Ra 02 SX1278, after receiving data from nodes, gateway will send data to the Web Server in running in Cloud, I use Firebase and GoogleCloud to store and share datas with the monitor Web Application and the Mobie Application via API. Source code of the gateway implementation in this project you can find [here](https://github.com/tovanhieu/LoraSX1278-Raspberrypi/blob/master/RaspberryPi-Gateway/LORA_Gateway-01_encrypted.py)<br>
+2. **Gateway**: We use Raspberry Pi 3 B+ integrated with module Lora-Ra 02 SX1278, after receiving data from nodes, gateway will send data to the Web Server in running in Cloud, We use Firebase and GoogleCloud to store and share datas with the monitor Web Application and the Mobie Application via API. Source code of the gateway implementation in this project you can find [here](https://github.com/tovanhieu/LoraSX1278-Raspberrypi/blob/master/RaspberryPi-Gateway/LORA_Gateway-01_encrypted.py)<br>
 #### Block diagram
 ![Screenshot 2023-09-20 152458](https://github.com/tovanhieu/LoraSX1278-Raspberrypi/assets/26000753/b6f740de-5876-41ba-b84b-e633b73199c5)
 
 ![Screenshot 2023-09-20 152600](https://github.com/tovanhieu/LoraSX1278-Raspberrypi/assets/26000753/c2462c20-ad09-46a0-82a1-a62fbf7feb8b)<br>
 3. **Web server**: Web server will recieve data from gateway and share with Mobile Application via API. The datas are showed and monitored in json format integrated with Firebase database.
 ![IoT6](https://github.com/tovanhieu/IoT-LoraSX1278-Raspberrypi/assets/26000753/030de9e4-639f-4e7f-a2a9-ec05a4e0caa9)
-
 
 
 ### Last Update 
