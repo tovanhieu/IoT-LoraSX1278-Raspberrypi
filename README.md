@@ -37,12 +37,15 @@ This is the proposal architecture:
 ![Gateway_3](https://github.com/tovanhieu/IoT-LoraSX1278-Raspberrypi/assets/26000753/5baf7dad-e29c-453d-ac17-c5f279b9bf17)
 
 ![Screenshot 2023-09-20 152600](https://github.com/tovanhieu/LoraSX1278-Raspberrypi/assets/26000753/c2462c20-ad09-46a0-82a1-a62fbf7feb8b)<br>
-3. **Web server**: Web server will recieve data from gateway and share with Mobile Application via API. The datas are showed and monitored in json format integrated with Firebase database.
-![IoT6](https://github.com/tovanhieu/IoT-LoraSX1278-Raspberrypi/assets/26000753/030de9e4-639f-4e7f-a2a9-ec05a4e0caa9)
-
+3. **Web application**: Web server will recieve data from gateway and share with Mobile Application via API. The datas are showed and monitored in json format integrated with Firebase database. The source code can be found [here](https://github.com/tovanhieu/IoT-LoraSX1278-Raspberrypi/blob/master/MonitorWebApplication.html)
+<br>
+**Note**: _This web application is just only for demonstration you can develop some analytic features in the future._
+![IoT6](https://github.com/tovanhieu/IoT-LoraSX1278-Raspberrypi/assets/26000753/030de9e4-639f-4e7f-a2a9-ec05a4e0caa9) 
 
 ### Last Update 
 10/2023
+### Summury
+If you like my project don't forget to drop a star 🌟 on my github repo. Have nice day 😊!
 ## Referencece Links
 #### https://github.com/rpsreal/pySX127x
 #### https://pypi.org/project/pyLoRa/
