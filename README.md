@@ -1,9 +1,9 @@
 # IoT LoRa transmission project 📡
-## Develop by tovanhieu - (Toni)
+## Developed by Hieu - (Toni)
 _**This IoT project uses LoRa transmission technology. You can modify and contribute to my code as long as you include the original copyright notice and disclaimer.**_
 <br>
 <br>
-Before going deeper into the project, I highly recommend that you try communicating between the Lora module and Arduino as a first step to getting familiarized with them. You can find my source code + tutorial [here](https://github.com/tovanhieu/IoT-LoraSX1278-Raspberrypi/tree/master/Lora%20Ra-02/Arduino )
+Before going deeper into the project, I highly recommend that you try communicating between the Lora module and Arduino as a first step to getting familiarized. You can find my source code + tutorial [here](https://github.com/tovanhieu/IoT-LoraSX1278-Raspberrypi/tree/master/Lora%20Ra-02/Arduino )
 #### Nedded python packages for the project:
 Install it using pip or pip3, but I suggest using pip3
 </br>
@@ -42,7 +42,7 @@ This is the proposal architecture:
 
 
 ### Last Update 
-09/2023
+10/2023
 ## Referencece Links
 #### https://github.com/rpsreal/pySX127x
 #### https://pypi.org/project/pyLoRa/
