@@ -1,7 +1,6 @@
 # IoT LoRa transmission project 📡
-## Author: Hieu (Toni)
-## Contributor: Trung.
-_**This IoT project uses LoRa transmission technology only for studying and researching purpose. You can modify and contribute to my code as long as you include the original copyright notice and disclaimer.**_
+## Develop by tovanhieu - (Toni)
+_**This IoT project uses LoRa transmission technology. You can modify and contribute to my code as long as you include the original copyright notice and disclaimer.**_
 <br>
 <br>
 Before going deeper into the project, I highly recommend that you try communicating between the Lora module and Arduino as a first step to getting familiarized with them. You can find my source code + tutorial [here](https://github.com/tovanhieu/IoT-LoraSX1278-Raspberrypi/tree/master/Lora%20Ra-02/Arduino )
