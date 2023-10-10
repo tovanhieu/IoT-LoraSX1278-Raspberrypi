@@ -1,4 +1,16 @@
 # First time setup:	
+#### Node schematic: pin-out on Raspberry Pi Zero
+<br>
+
+![Node_1](https://github.com/tovanhieu/IoT-LoraSX1278-Raspberrypi/assets/26000753/222e6c36-701f-40b3-8d15-a349ba2f2cb2)
+<br>
+
+#### Node schematic: pin-out on Lora SX1278
+<br>
+
+![Node_2](https://github.com/tovanhieu/IoT-LoraSX1278-Raspberrypi/assets/26000753/d3b0929f-245f-4cb3-846c-da3194d3197f)
+<br>
+
 ### Easy setup essential python packet on Raspberry Pi Node:	
 ```bash	
 sudo raspi-config	
@@ -29,7 +41,7 @@ pip3 install pycryptodome
 pip3 install pycrypto	
 ```
  ## Config parameter file:	
-Open file config.ini in the folder and config lora transmission parameter for gateway 	
+Open file **config.ini** in the folder and config lora transmission parameter for gateway 	
 </br>	
  **Parameter configuration for node 1 and node 2 must be match up with parameter configuration in the file config.ini in node**	
 ```bash	
