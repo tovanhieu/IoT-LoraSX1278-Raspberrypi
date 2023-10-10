@@ -1,4 +1,15 @@
 # First time setup:	
+#### Gateway schematic: pin-out on Raspberry Pi B+
+<br>
+
+![Gateway_1](https://github.com/tovanhieu/IoT-LoraSX1278-Raspberrypi/assets/26000753/f9804baa-093d-4147-820a-ed0ba44301c8)
+<br>
+
+#### Gateway schematic: pin-out on Lora SX1278
+<br>
+
+![Gateway_2](https://github.com/tovanhieu/IoT-LoraSX1278-Raspberrypi/assets/26000753/5f7618e9-2d96-4c02-bc38-dcc68afde1c5)
+<br>
 ### Easy setup essential python packet on Raspberry Pi Gateway:	
 ```bash	
 sudo raspi-config	
