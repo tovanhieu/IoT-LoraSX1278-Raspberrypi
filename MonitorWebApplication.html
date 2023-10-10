@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+
+  <title>Query statistics client-side by distance - 4.12</title>
+
+  <!-- Load the Chart.js library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.12/esri/themes/light/main.css" />
+
+  <style>
+    html,
+    body {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    #viewDiv {
+      position: absolute;
+      left: 0;
+      right: 40%;
+      top: 0;
+      bottom: 0;
+      height: 100%;
+    }
+
+    #panel {
+      position: absolute;
+      right: 0;
+      height: 100%;
+      width: 40%;
+      overflow: scroll;
+    }
+
+    #num-homicides {
+      color: #ed5050;
+      font-size: 36pt;
+      font-weight: bolder;
+      line-height: 0.8;
+    }
+
+    #avg-age {
+      color: #149dcf;
+      font-size: 20pt;
+      font-weight: bolder;
+    }
+
+    #avg-open-time {
+      color: #149dcf;
+      font-size: 20pt;
+      font-weight: bolder;
+    }
+  </style>
+
+  <script src="https://js.arcgis.com/4.12/"></script>
+
+  <script>
+    require([
+      "esri/views/MapView",
+      "esri/WebMap",
+      "esri/widgets/Legend",
+      "esri/widgets/Expand",
+      "esri/widgets/Bookmarks",
+      "esri/core/lang",
+      "esri/core/promiseUtils",
+      "esri/core/watchUtils"
+    ], function (
+      MapView,
+      WebMap,
+      Legend,
+      Expand,
+      Bookmarks,
+      lang,
+      promiseUtils,
+      watchUtils
+    ) {
+      const webmap = new WebMap({
+        portalItem: {
+          id: "96cf806c32874026bef5f586315f098c"
+          // id : "436587bb14c44ff79633bebd1b6b102c"
+        }
+      });
+
+      const view = new MapView({
+        map: webmap,
+        container: "viewDiv",
+        constraints: {
+          minScale: 300000
+        },
+        highlightOptions: {
+          color: "black",
+          haloOpacity: 0.65,
+          fillOpacity: 0.45
+        }
+      });
+
+      // Add UI elements to the view
+
+      // Displays instructions to the user for understanding the sample
+      // And places them in an Expand widget instance
+
+      const titleContent = document.createElement("div");
+      titleContent.style.padding = "15px";
+      titleContent.style.backgroundColor = "white";
+      titleContent.style.width = "500px";
+      titleContent.innerHTML = [
+        "<div id='title' class='esri-widget'>",
+        "<span id='num-homicides'>Web Application Monitor</span>",
+        "</div>"
+      ].join(" ");
+
+
+      const titleExpand = new Expand({
+        expandIconClass: "esri-icon-dashboard",
+        expandTooltip: "Summary stats",
+        view: view,
+        content: titleContent,
+        expanded: view.widthBreakpoint !== "xsmall"
+      });
+      view.ui.add(titleExpand, "top-right");
+
+      const legendExpand = new Expand({
+        view: view,
+        content: new Legend({
+          view: view
+        }),
+        expanded: view.widthBreakpoint !== "xsmall"
+      });
+      view.ui.add(legendExpand, "bottom-left");
+
+      view.watch("widthBreakpoint", function (newValue) {
+        titleExpand.expanded = newValue !== "xsmall";
+        legendExpand.expanded = newValue !== "xsmall";
+      });
+
+      const bookmarksWidget = new Bookmarks({
+        view: view
+      });
+
+      const bookmarksExpand = new Expand({
+        view: view,
+        content: bookmarksWidget
+      });
+      view.ui.add(bookmarksExpand, "top-right");
+
+      bookmarksWidget.on("select-bookmark", function (event) {
+        bookmarksExpand.expanded = false;
+      });
+
+      // Displays instructions to the user for understanding the sample
+      // And places them in an Expand widget instance
+
+      const sampleInstructions = document.createElement("div");
+      sampleInstructions.style.padding = "10px";
+      sampleInstructions.style.backgroundColor = "white";
+      sampleInstructions.style.width = "300px";
+      sampleInstructions.innerHTML = [
+        "<b>Drag</b> the pointer over the data to view stats",
+        "within one mile of the pointer location."
+      ].join(" ");
+
+      const instructionsExpand = new Expand({
+        expandIconClass: "esri-icon-question",
+        expandTooltip: "How to use this sample",
+        view: view,
+        content: sampleInstructions
+      });
+      view.ui.add(instructionsExpand, "top-left");
+
+      let highlightHandle = null;
+
+      /**
+       * Create charts and start querying the layer view when
+       * the view is ready and data begins to draw in the view
+       */
+      view.when().then(function () {
+        // Create the charts when the view is ready
+        createCharts();
+
+        view.whenLayerView(layer).then(function (layerView) {
+          watchUtils.whenFalseOnce(layerView, "updating", function (val) {
+            // Query layer view statistics as the user clicks
+            // or drags the pointer across the view.
+            view.on(["click", "drag"], function (event) {
+              // disables navigation by pointer drag
+              event.stopPropagation();
+              queryStatsOnDrag(layerView, event).then(updateCharts);
+            });
+          });
+        });
+      });
+
+      /**
+       * Queries statistics against the layer view at the given screen location
+       */
+      var queryStatsOnDrag = promiseUtils.debounce(function (
+        layerView,
+        event
+      ) {
+        // create a query object for the highlight and the statistics query
+
+        const query = layerView.layer.createQuery();
+        query.geometry = view.toMap(event); // converts the screen point to a map point
+        query.distance = 1; // queries all features within 1 mile of the point
+        query.units = "miles";
+
+        const statsQuery = query.clone();
+
+        // date used to calculate the average time a case has been opened
+
+        const dataDownloadDate = Date.UTC(2018, 6, 5);
+
+        // Create the statistic definitions for querying stats from the layer view
+        // the `onStatisticField` property can reference a field name or a SQL expression
+        // `outStatisticFieldName` is the name of the statistic you will reference in the result
+        // `statisticType` can be sum, avg, min, max, count, stddev
+        const statDefinitions = [
+          // Age of crime since it was reported in years
+
+          {
+            onStatisticField:
+              "(" +
+              dataDownloadDate +
+              " - milliseconds) / (1000 * 60 * 60 * 24 * 365.25)",
+            outStatisticFieldName: "avg_open_time_years",
+            statisticType: "avg"
+          },
+
+          // total homicides
+
+          {
+            onStatisticField: "1",
+            outStatisticFieldName: "total",
+            statisticType: "count"
+          },
+        ];
+
+        // add the stat definitions to the the statistics query object cloned earlier
+        statsQuery.outStatistics = statDefinitions;
+
+        // execute the query for all features in the layer view
+        const allStatsResponse = layerView.queryFeatures(statsQuery).then(
+          function (response) {
+            const stats = response.features[0].attributes;
+            return stats;
+          },
+          function (e) {
+            console.error(e);
+          }
+        );
+
+        const openStatsQuery = statsQuery.clone();
+        openStatsQuery.where = "disposition = 'Open/No arrest'";
+
+        // execute the query for only unsolved homicides in the layer view
+        const unsolvedStatsResponse = layerView
+          .queryFeatures(openStatsQuery)
+          .then(
+            function (response) {
+              const stats = response.features[0].attributes;
+              return stats;
+            },
+            function (e) {
+              console.error(e);
+            }
+          );
+        // Return the promises that will resolve to each set of statistics
+        return promiseUtils.eachAlways([
+          allStatsResponse,
+          unsolvedStatsResponse
+        ]);
+      });
+
+
+      /**
+       * Updates the given chart with new data
+       */
+      function updateChart(chart, dataValues) {
+        if (chart.config.type === "doughnut") {
+          chart.data.datasets[0].data = dataValues;
+        } else {
+          chart.data.datasets[0].data = dataValues.solved;
+          chart.data.datasets[1].data = dataValues.unsolved;
+        }
+        chart.update();
+      }
+
+      /**
+       * Creates 2 charts for environment and node management
+     */
+      function createCharts() {
+        totalNumber = document.getElementById("num-homicides");
+        avgAge = document.getElementById("avg-age");
+        avgOpenTime = document.getElementById("avg-open-time");
+
+        const yearCanvas = document.getElementById("env-chart");
+        yearChart = new Chart(yearCanvas.getContext("2d"), {
+          type: "line",
+          data: {
+            labels: [
+              "08:00 AM",
+              "08:01 AM",
+              "08:02 AM",
+              "08:03 AM",
+              "08:04 AM",
+              "08:05 AM",
+              "08:06 AM",
+              "08:07 AM",
+              "08:08 AM",
+              "08:09 AM"
+            ],
+            datasets: [
+              {
+                label: "Temperature",
+                backgroundColor: "#149dcf",
+                stack: "Stack 0",
+                data: [27, 27.8, 27.6, 28, 29, 28.3, 26.7, 26.9, 29, 28]
+              },
+              {
+                label: "Humidity",
+                backgroundColor: "#ed5050",
+                stack: "Stack 0",
+                data: [80, 80.12, 80.45, 86.5, 87, 88, 89.9, 88.76, 87.87, 88]
+              },
+              {
+                label: "Air Quality",
+                backgroundColor: "#ed9213",
+                stack: "Stack 0",
+                data: [98.3, 97.155, 97, 97.77, 98.14, 95.21, 98.887, 98.76, 97.87, 99.478]
+              }
+            ]
+          },
+          options: {
+            responsive: false,
+            legend: {
+              position: "top"
+            },
+            title: {
+              display: true,
+              text: "Environment"
+            },
+            scales: {
+              xAxes: [
+                {
+                  stacked: true
+                }
+              ],
+              yAxes: [
+                {
+                  stacked: true,
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }
+              ]
+            }
+          }
+        });
+
+        const ageCanvas = document.getElementById("Node-status-chart");
+        ageChart = new Chart(ageCanvas.getContext("2d"), {
+          type: "horizontalBar",
+          data: {
+            labels: ["Node_01", "Node_02", "Node_03", "Node_04"],
+            datasets: [
+              {
+                label: "Energy (%)",
+                backgroundColor: "#149dcf",
+                stack: "Stack 0",
+                data: [30, 45, 76, 97]
+              },
+              {
+                label: "Power Comsumption (mW)",
+                backgroundColor: "#ed5050",
+                stack: "Stack 0",
+                data: [1.32, 2.32, 2.7, 5.32]
+              }
+            ]
+          },
+          options: {
+            responsive: false,
+            legend: {
+              position: "top"
+            },
+            title: {
+              display: true,
+              text: "Node management"
+            },
+            scales: {
+              xAxes: [
+                {
+                  stacked: true,
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }
+              ],
+              yAxes: [
+                {
+                  stacked: true
+                }
+              ]
+            }
+          }
+        });
+
+        const dispositionCanvas = document.getElementById(
+          "disposition-chart"
+        );
+        dispositionChart = new Chart(dispositionCanvas.getContext("2d"), {
+          type: "doughnut",
+          data: {
+            labels: [
+              "Closed by arrest",
+              "Closed without arrest",
+              "Open/No arrest"
+            ],
+            datasets: [
+              {
+                backgroundColor: ["#149dcf", "#a6c736", "#ed5050"],
+                borderColor: "rgb(255, 255, 255)",
+                borderWidth: 1,
+                data: [0, 0, 0]
+              }
+            ]
+          },
+          options: {
+            responsive: false,
+            cutoutPercentage: 35,
+            legend: {
+              position: "bottom"
+            },
+            title: {
+              display: true,
+              text: "Status of the subway"
+            }
+          }
+        });
+
+        const genderCanvas = document.getElementById("gender-chart");
+        genderChart = new Chart(genderCanvas.getContext("2d"), {
+          type: "doughnut",
+          data: {
+            labels: [
+              "Male (solved)",
+              "Male (unsolved)",
+              "Female (solved)",
+              "Female (unsolved)"
+            ],
+            datasets: [
+              {
+                backgroundColor: ["#149dcf", "#0a4d66", "#ed5050", "#7c2525"],
+                borderColor: "rgb(255, 255, 255)",
+                borderWidth: 1,
+                data: [0, 0, 0, 0]
+              }
+            ]
+          },
+          options: {
+            responsive: false,
+            cutoutPercentage: 35,
+            legend: {
+              position: "bottom"
+            },
+            title: {
+              display: true,
+              text: "Status of ...."
+            }
+          }
+        });
+
+        const raceCanvas = document.getElementById("race-chart");
+        raceChart = new Chart(raceCanvas.getContext("2d"), {
+          type: "doughnut",
+          data: {
+            labels: [
+              "Asian (solved)",
+              "Asian (unsolved)",
+              "Black (solved)",
+              "Black (unsolved)",
+              "Hispanic (solved)",
+              "Hispanic (unsolved)",
+              "White (solved)",
+              "White (unsolved)"
+            ],
+            datasets: [
+              {
+                backgroundColor: [
+                  "#ed5050",
+                  "#7c2525",
+                  "#149dcf",
+                  "#0a4d66",
+                  "#a6c736",
+                  "#52631a",
+                  "#fc9220",
+                  "#7c470d"
+                ],
+                borderColor: "rgb(255, 255, 255)",
+                borderWidth: 1,
+                data: [0, 0, 0, 0, 0, 0, 0, 0]
+              }
+            ]
+          },
+          options: {
+            responsive: false,
+            cutoutPercentage: 35,
+            legend: {
+              position: "bottom"
+            },
+            title: {
+              display: true,
+              text: "Race of the victim"
+            }
+          }
+        });
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <div id="viewDiv"></div>
+  <div id="panel">
+    <div style="padding: 15px;">
+      <canvas id="env-chart" height="250" width="550"></canvas>
+      <canvas id="Node-status-chart" height="250" width="550"></canvas>
+    </div>
+  </div>
+</body>
+
+</html>
